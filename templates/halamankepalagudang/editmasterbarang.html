@@ -1,0 +1,152 @@
+{% extends "halamankepalagudang/layout.html" %}
+
+{% block title %}Edit Master Barang{% endblock %}
+
+{% block content %}
+<!-- <form action="/kepgud/daftarbarang/edit/{{ row.id_stok }}" method=post>
+        <br>
+            <div class="card-body">
+
+                    <div class="mb-3 row">
+                        <label for="id_kategori" class="col-sm-2 col-form-label">Kategori:</label>
+                            <div class="col-sm-10">
+                                <select name="id_kategori" id="cars" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="{{row.id_kategori}}">{{row.namakategori}}</option>
+                                    {% for kategoribarang in kategoribarang %}
+                                              <option value="{{kategoribarang.id_kategori}}">{{kategoribarang.namakategori}}</option>
+                                              {% endfor %}
+                                  </select>                            
+                                </div>
+                        </div>
+            
+                    <div class="mb-3 row">
+                        <label for="id_satuan" class="col-sm-2 col-form-label">Satuan Barang:</label>
+                            <div class="col-sm-10">
+                                <select name="id_satuan" id="cars" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="{{row.id_satuan}}">{{row.nama_satuan}}</option>
+                                    {% for satuanbarang in satuanbarang %}
+                                              <option value="{{satuanbarang.id_satuan}}">{{satuanbarang.nama_satuan}}</option>
+                                              {% endfor %}
+                                  </select>                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label for="namabarang" class="col-sm-2 col-form-label">Nama Barang:</label>
+                                <div class="col-sm-10">
+                            <input type="input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="namabarang" value="{{ row.namabarang }}" required autocomplete="off">
+                                </div>
+                            </div>
+            
+                    <div class="mb-3 row">
+                        <label for="merk" class="col-sm-2 col-form-label">Merk Barang:</label>
+                            <div class="col-sm-10">
+                        <input type="input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="merk" value="{{ row.merk }}" required autocomplete="off">
+                            </div>
+                        </div>
+            
+                    <div class="mb-3 row">
+                        <label for="idsumberdana" class="col-sm-2 col-form-label">ID Sumber Dana:</label>
+                            <div class="col-sm-10">
+                                <select name="idsumberdana" id="cars" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="{{row.idsumberdana}}">{{row.namasumberdana}}</option>
+                                    {% for sumberdana in sumberdana %}
+                                              <option value="{{sumberdana.idsumberdana}}">{{sumberdana.namasumberdana}}</option>
+                                              {% endfor %}
+                                  </select>                                
+                                </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label for="stok" class="col-sm-2 col-form-label">Stok Barang:</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="stok" value="{{ row.stok }}" required autocomplete="off">                             
+                                    </div>
+                            </div>
+            </div>
+            <div class="card text-center">
+                <div class="card-footer text-muted">
+                    <button type="submit" class="text-white bg-primary hover:bg-primary-darker focus:ring-4 focus:outline-none focus:ring-primary dark:bg-primary dark:hover:bg-primary-darker dark:focus:ring-primary-dark font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2 transition duration-150">Update</button>
+                    <br/>
+                    <br>
+            </div>
+            </div>
+          
+    </form> -->
+
+    <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
+        <h1 class="text-2xl font-semibold"><a href="#"><i class="bi bi-arrow-left"></i></a>Tambah Stock </h1>
+      </div>
+    
+      <div class="flex mb-36 ">
+        <!-- image -->
+        <div class="mt-5 ml-5 mb-5">
+            <div class="w-[400px] h-[300px] bg-gray-800 rounded-lg ">
+                <img src="/static/img/barang/{{ row.files }}" class="w-[400px] h-[300px] bg-gray-800 rounded-lg ">  
+            </div>
+        </div>
+        <div class="ml-5 mt-5">
+            <form class="space-y-6" action="/kepgud/daftarbarang/edit/{{ row.id_stok }}" method=post>
+                <div>
+                    
+                    <div class="flex justify-between items-center">
+                        <div class="mx-1">
+                            <label for="idsumberdana" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Sumber Dana</label>
+                                  <select name="idsumberdana" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                                    <option value="{{row.idsumberdana}}">{{row.namasumberdana}}</option>
+                                    {% for sumberdana in sumberdana %}
+                                              <option value="{{sumberdana.idsumberdana}}">{{sumberdana.namasumberdana}}</option>
+                                              {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mx-1">
+                                <label for="kategori" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Kategori</label>
+                                <select name="id_kategori" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" title="Kategori">
+                                    <option value="{{row.id_kategori}}">{{row.namakategori}}</option>
+                                    {% for kategoribarang in kategoribarang %}
+                                              <option value="{{kategoribarang.id_kategori}}">{{kategoribarang.namakategori}}</option>
+                                              {% endfor %}
+                                    </select>
+                                </div>
+                            <div class="mx-1">
+                                <label for="rak" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Satuan</label>
+                                <select name="id_satuan" class="mx-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" title="Kategori">
+                                    <option value="{{row.id_satuan}}">{{row.nama_satuan}}</option>
+                                    {% for satuanbarang in satuanbarang %}
+                                              <option value="{{satuanbarang.id_satuan}}">{{satuanbarang.nama_satuan}}</option>
+                                              {% endfor %}
+                                    </select>
+                                </div>
+        
+                    </div>
+                </div>
+            <div>
+                <label for="namabarang" class="block text-sm font-medium text-gray-900 dark:text-gray-300">Nama Barang</label>
+                <div class="flex items-center">
+                    <input type="text" name="namabarang" value="{{ row.namabarang }}" placeholder="Nama Barang" class="mx-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" autocomplete="off" required>
+                    <input type="text" name="merk" value="{{ row.merk }}" class="mx-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" autocomplete="off" required>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="stok" class="block text-sm font-medium text-gray-900 dark:text-gray-300">Stock Barang :</label>
+                    <div class="flex items-center">
+                        <input type="number" name="stok" value="{{ row.stok }}" class="mx-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" autocomplete="off" required>
+                    </div>
+                </div>  
+            </div>
+            <div class="flex justify-between">
+                <button type="submit" class="text-black bg-sky-500 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-primary dark:bg-primary dark:hover:bg-primary-darker dark:focus:ring-primary-dark font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2 transition duration-150">
+                    Tambah
+                </button>
+                <a href="{{ url_for('daftarbarang') }}" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border-2 text-sm font-medium px-5 py-2.5 transition duration-150 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-primary-darker dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" data-modal-toggle="authentication-modal">
+                    Kembali
+                </a>
+            </div>
+            </form>    
+        </div>
+        
+      </div>
+      <br>
+      <br>
+    
+{% endblock %}

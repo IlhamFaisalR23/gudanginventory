@@ -1,0 +1,300 @@
+{% extends 'halamankepalasekolah/layout.html' %}
+
+{% block title %}Grafik Permintaan{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
+  <h1 class="text-2xl font-semibold">Dashboard</h1>
+
+</div>
+
+<!-- Content -->
+<div class="mt-2">
+  <!-- State cards -->
+  <div class="grid grid-cols-1 gap-8 p-4 lg:grid-cols-4">
+    <!-- Dana card -->
+    <div class="flex items-center justify-between p-4 bg-white rounded-md dark:bg-darker">
+      <div>
+        <a href="#">
+          <h6
+            class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light"
+          >
+            Jumlah Dana
+          </h6>
+        </a>
+        <span class="text-xl font-semibold">30</span>
+        <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
+          +4.4%
+        </span>
+      </div>
+      <div>
+        <span>
+          <svg
+            class="w-12 h-12 text-gray-300 dark:text-primary-dark"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
+
+    <!-- Users card -->
+    <div class="flex items-center justify-between p-4 bg-white rounded-md dark:bg-darker">
+      <div>
+        <a href="#">
+          <h6
+            class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light"
+          >
+            Users
+          </h6>
+        </a>
+        <span class="text-xl font-semibold">{{ jumlahpegawai.jumlahpegawai }}</span>
+        <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
+          +2.6%
+        </span>
+      </div>
+      <div>
+        <span>
+          <svg
+            class="w-12 h-12 text-gray-300 dark:text-primary-dark"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
+
+    <!-- Orders card -->
+    <div class="flex items-center justify-between p-4 bg-white rounded-md dark:bg-darker">
+      <div>
+        <a href="#">
+          <h6
+            class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light"
+          >
+            Orders
+          </h6>
+        </a>
+        <span class="text-xl font-semibold">{{ jumlahpermintaan.jumlahpermintaan }}</span>
+        <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
+          +3.1%
+        </span>
+      </div>
+      <div>
+        <span>
+          <svg
+            class="w-12 h-12 text-gray-300 dark:text-primary-dark"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
+
+    <!-- Barang Hampir Habis card -->
+    <div class="flex items-center justify-between p-4 bg-white rounded-md dark:bg-darker">
+      <div>
+        <a
+          href="#"
+          class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light"
+        >
+          Barang Hampir habis
+      </a>
+        <span class="text-xl font-semibold">{{ barangsedikit.barangsedikit }}</span>
+        <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
+          +3.1%
+        </span>
+      </div>
+      <div>
+        <span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-box-seam w-12 h-12 text-gray-300 dark:text-primary-dark"
+            viewBox="0 0 16 16">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
+          </svg>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 p-4 space-y-5 lg:gap-5 lg:space-y-0 lg:grid-cols-1">
+    <!-- Bar chart card -->
+    <div class="col-span-6 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+      <!-- Card header -->
+      <div class="flex items-center justify-between p-4 border-b dark:border-primary">
+        <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Grafik Permintaan</h4>
+        <div class="flex items-center space-x-2">
+          <span class="text-sm text-gray-500 dark:text-light"></span>
+        </div>
+      </div>
+      <!-- Chart -->
+      <div class="relative p-4 h-full">
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+          google.charts.load("current", {packages:["corechart"]});
+          google.charts.setOnLoadCallback(drawChart);
+          function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+            ["Barang", "Jumlah Order", { role: "style" } ],
+            {% for permintaanbaranglagi in permintaanbaranglagi %}
+              ["{{ permintaanbaranglagi.namabarang }}", {{ permintaanbaranglagi.totalpermintaan }}, "blue"],
+              {% endfor %}    
+      ]);
+      
+      var view = new google.visualization.DataView(data);
+            view.setColumns([0, 1,
+                             { calc: "stringify",
+                               sourceColumn: 1,
+                               type: "string",
+                               role: "annotation" },
+                             2]);
+      
+            var options = {
+              title: "Barang & Jumlah Permintaan",
+              width: 600,
+              height: 400,
+              bar: {groupWidth: "95%"},
+              legend: { position: "none" },
+              orientation: 'horizontal',
+        vAxis: {format: '0'}
+
+            };
+            var chart = new google.visualization.BarChart(document.getElementById("chart_permintaan"));
+            chart.draw(view, options);
+        }
+        </script>
+      <div id="chart_permintaan"></div>
+
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-1">
+    <!-- Bar chart card -->
+    <div class="col-span-2 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+      <!-- Card header -->
+      <div class="flex items-center justify-between p-4 border-b dark:border-primary">
+        <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Grafik Permintaan</h4>
+        <div class="flex items-center space-x-2">
+          <span class="text-sm text-gray-500 dark:text-light"></span>
+        </div>
+      </div>
+      <!-- Chart -->
+      <div class="relative p-4 h-full">
+        <script type="text/javascript">
+          google.charts.load("current", {packages:["corechart"]});
+          google.charts.setOnLoadCallback(drawChart);
+          function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+              
+              ["Bulan", "Jumlah Permintaan", { role: "style" } ],
+              {% for permintaanjanuari in permintaanjanuari %}
+              ["Januari", {{ permintaanjanuari.permintaanjanuari }}, "blue"],
+              {% endfor %} 
+              {% for permintaanfebruari in permintaanfebruari %}
+              ["Februari", {{ permintaanfebruari.permintaanfebruari }}, "green"],
+              {% endfor %} 
+              {% for permintaanmaret in permintaanmaret %}
+              ["Maret", {{ permintaanmaret.permintaanmaret }}, "gold"],
+              {% endfor %} 
+              {% for permintaanapril in permintaanapril %}
+              ["April", {{ permintaanapril.permintaanapril }}, "silver"],
+              {% endfor %} 
+              {% for permintaanmei in permintaanmei %}
+              ["Mei", {{ permintaanmei.permintaanmei }}, "yellow"],
+              {% endfor %} 
+              {% for permintaanjuni in permintaanjuni %}
+              ["Juni", {{ permintaanjuni.permintaanjuni }}, "gray"],
+              {% endfor %} 
+              {% for permintaanjuli in permintaanjuli %}
+              ["Juli", {{ permintaanjuli.permintaanjuli }}, "gold"],
+              {% endfor %} 
+              {% for permintaanagustus in permintaanagustus %}
+              ["Agustus", {{ permintaanagustus.permintaanagustus }}, "gold"],
+              {% endfor %} 
+              {% for permintaanseptember in permintaanseptember %}
+              ["September", {{ permintaanseptember.permintaanseptember }}, "gold"],
+              {% endfor %} 
+              {% for permintaanoktober in permintaanoktober %}
+              ["Oktober", {{ permintaanoktober.permintaanoktober }}, "color: #e5e4e2"],
+              {% endfor %} 
+              {% for permintaannovember in permintaannovember %}
+              ["November", {{ permintaannovember.permintaannovember }}, "red"],
+              {% endfor %} 
+              {% for permintaandesember in permintaandesember %}
+              ["Desember", {{ permintaandesember.permintaandesember }}, "blue"]
+              {% endfor %} 
+              
+            ]);
+            
+      
+            var view = new google.visualization.DataView(data);
+            view.setColumns([0, 1,
+                             { calc: "stringify",
+                               sourceColumn: 1,
+                               type: "string",
+                               role: "annotation" },
+                             2]);
+      
+                             var options = {
+        title: "Jumlah Permintaan Tahun Ini",
+        width: 1000,
+        colors:['red','#004411'],
+        height: 400,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+        orientation: 'horizontal',
+        vAxis: {format: '0'}
+      };
+            var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+            chart.draw(view, options);
+        }
+        </script>
+      <div id="barchart_values" style="width: 900px; height: 400px;"></div>
+
+      </div>
+    </div>
+    
+
+  </div>
+  
+
+</div>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+{% endblock %}

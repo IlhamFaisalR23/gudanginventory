@@ -1,0 +1,243 @@
+{% extends 'halamankepalagudang/layout.html' %}
+
+{% block title %}Daftar Barang Keluar{% endblock %}
+
+{% block content %}
+<style>
+    .dataTables_wrapper .dataTables_filter {
+        float: none;
+        text-align: center;
+    }
+    a.paginate_button,
+    a.paginate_active {
+        display: inline-block;
+        background-color: #8d8d8d;
+        padding: 2px 6px;
+        margin-left: 2px;
+        cursor: pointer;
+        *cursor: hand;
+    }
+    .paginate_button.current  {
+        color: white !important;
+      background-color: #2980B9 !important;
+    }
+    .paging_full_numbers a.paginate_button {
+        color: #fff !important;
+    }
+    .paging_full_numbers a.paginate_active {
+        color: #fff !important;
+    }
+     
+    div.dataTables_info {
+        padding: 9px 6px 6px 6px;
+    }
+    </style>
+<div class="flex items-center justify-between px-4 py-4 border-b lg:py-4 dark:border-primary-darker">
+    <h1 class="text-2xl font-semibold">Barang Keluar </h1>
+    <div class="flex items-center mt-2">
+<form action="/kepgud/barangkeluar/download/report/excel" method=post class="flex items-center">
+        <input type="month" class="bg-gray-50 border border-gray-300 text-gray-900 mr-2 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[128px] p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" name="tgl_keluar">
+                <button href="/kepgud/barangkeluar/download/report/excel" class="px-4 py-2 mt-1 text-sm text-black bg-green-600 rounded-md bg-primary hover:bg-primary-dark focus:outline-none focus:ring focus:ring-primary focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark" type="submit">
+        Export -> Excel    
+    </div>
+</form>
+</div>  
+
+<link rel="stylesheet" href="fnon.min.css" />
+<script src="fnon.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.jqueryui.min.css" />
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+    <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="authentication-modal">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+
+            <div class="py-6 px-6 lg:px-8">
+                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">+ Tambah Barang Keluar</h3>
+                <form action="/kepgud/barangkeluar/tambahbarangkeluar" method=post>
+                    <div class="flex justify-between items-center">
+                        <div class="mx-1">
+                            <label for="id_barangkeluar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">ID Barang Keluar</label>
+                            <input type="number" name="id_barangkeluar" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Auto Generated">
+                        </div>
+                        <div class="mx-1">
+                            <label for="id_barang" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nama Barang</label>
+                            <select name="id_barang" class="mx-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" title="Kategori">
+                                {% for daftarbarang in daftarbarang %}
+                                <option value="{{daftarbarang.id_barang}}">{{daftarbarang.namabarang}}</option>
+                                {% endfor %}
+                                </select>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="mx-1">
+                            <label for="id_user" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nama Pengguna</label>
+                            <select name="id_user" class="mx-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" title="Kategori">
+                                {% for daftarpegawai in daftarpegawai %}
+                                <option value="{{daftarpegawai.id_user}}">{{daftarpegawai.nama}}</option>
+                                {% endfor %}
+                                </select>
+                        </div>
+                        <div class="mx-1">
+                            <label for="kode_jabatan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nama Jabatan</label>
+                            <select name="kode_jabatan" class="mx-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" title="Kategori">
+                                {% for daftarjabatan in daftarjabatan %}
+                                <option value="{{daftarjabatan.kode_jabatan}}">{{daftarjabatan.nama_jabatan}}</option>
+                                {% endfor %}
+                                </select>
+                        </div>
+
+                    </div>
+                    <div>
+                        <label for="jumlah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Jumlah Keluar</label>
+                        <div class="flex justify-between items-center">
+                            <input type="number" name="jumlah" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Jumlah Barang Keluar" required autocomplete="off">
+
+                            </div>
+                    </div>
+                    <br/>
+                    <div class="flex justify-between">
+                        <button type="submit" class="text-white bg-primary hover:bg-primary-darker focus:ring-4 focus:outline-none focus:ring-primary dark:bg-primary dark:hover:bg-primary-darker dark:focus:ring-primary-dark font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2 transition duration-150">
+                            Tambah
+                        </button>
+                        <button type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border-2 text-sm font-medium px-5 py-2.5 transition duration-150 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-primary-darker dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" data-modal-toggle="authentication-modal">
+                            Kembali
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- <br/>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.jqueryui.min.css" />
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div>
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" style="width: 100%;" id="mytable">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-darker dark:text-gray-400">
+          <tr>
+            <th scope="col" class="py-3 px-6">Nama Barang</th>
+            <th scope="col" class="py-3 px-6">Nama Penerima</th>
+            <th scope="col" class="py-3 px-6">Jabatan Penerima</th>
+            <th scope="col" class="py-3 px-6">Jumlah Keluar</th>
+            <th scope="col" class="py-3 px-6">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for row in databarangkeluar %}
+          <tr class="bg-white border-b dark:bg-dark border-gray-700">
+            <td scope="row" class="py-4 px-6 font-medium whitespace-nowrap text-gray-800 dark:text-white">{{ row.namabarang }}</td>
+            <td class="py-4 px-6">{{ row.nama }}</td>
+            <td class="py-4 px-6">{{ row.nama_jabatan }}</td>
+            <td class="py-4 px-6">{{ row.jumlah }}</td>
+            <td class="py-4 px-6"><a href="/kepgud/barangkeluar/hapusbarangkeluar/{{ row.id_barangkeluar }}" role="button"class="bg-primary dark:bg-primary text-white rounded-md px-6 py-2 text-sm font-medium hover:bg-primary-dark dark:hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary delete-confirm" data-modal-toggle="popup-modal" role="button"><i class="bi bi-trash"></i></a>
+
+          </tr>
+          {% endfor %}
+        </tbody>
+        <script>
+          $('#mytable').dataTable();
+      </script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" />
+      <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+      </table>
+    
+</div> -->
+
+<div class="overflow-x-auto relative shadow-md">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" id="mytable">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="py-3 px-6">
+                    Nama Barang
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    Nama Penerima
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    Jabatan Penerima
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    Jumlah  Keluar
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    Tanggal Keluar
+                </th>
+                 <th scope="col" class="py-3 px-6">
+                    Action
+                </th> 
+            </tr>
+        </thead>
+        <tbody>
+             {% for row in databarangkeluar %}
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="py-4 px-6 font-medium  whitespace-nowrap ">
+                    {{ row.namabarang }}
+                </th>
+                <td class="py-4 px-6">
+                    {{ row.nama }}
+                </td>
+                <td class="py-4 px-6">
+                    {{ row.nama_jabatan }}
+                </td>
+                <td class="py-4 px-6">
+                    {{ row.jumlah }}
+                </td>
+                <td class="py-4 px-6">
+                    {{ row.tgl_keluar }}
+                </td>
+                <td class="py-4 px-6">
+                    <a href="/kepgud/barangkeluar/hapusbarangkeluar/{{ row.id }}" role="button" class="bg-primary dark:bg-primary text-white rounded-md px-6 py-2 text-sm font-medium hover:bg-primary-dark dark:hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary delete-confirm" data-modal-toggle="popup-modal" role="button"><i class="bi bi-trash"></i></a>
+                </td>
+            </tr>
+            {% endfor %} 
+            
+        </tbody>
+        <script>
+            $('#mytable').dataTable({
+                "language": {
+                    "emptyTable": "Tabel Kosong",
+                    "lengthMenu":     "Menampilkan _MENU_ Data"
+                },
+                "lengthMenu": [ [5, 10, 50, -1], [5, 10, 50, "Semua"] ],
+                
+                pagingType: 'full_numbers'
+                
+                
+            });
+            $(document).ready(function () {             
+                $('.dataTables_filter select').
+        attr('placeholder','Search in this blog ....').
+        css({'width':'350px','display':'inline-block'});
+        
+        });
+        
+        </script>
+        
+    </table>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,849 @@
+{% extends 'halamankepalagudang/layout.html' %}
+
+{% block title %}Notifikasi{% endblock %}
+
+{% block content %}
+
+    <!-- Content header -->
+    <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
+        <h1 class="text-2xl font-semibold"><i class="bi bi-arrow-left"></i> Notifikasi</h1>
+    </div>
+
+    <!--Modal Terima pop-up -->
+    <div id="terima-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full">
+        <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="terima-modal">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+                <div class="p-6 text-center">
+                    <svg aria-hidden="true" class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to accept this product?</h3>
+                    <button data-modal-toggle="terima-modal" type="" class="text-white bg-primary hover:bg-primary-darker focus:ring-4 focus:outline-none focus:ring-primary dark:bg-primary dark:hover:bg-primary-darker dark:focus:ring-primary-dark font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2 transition duration-150">
+                        Yes, I'm sure
+                    </button>
+                    <button data-modal-toggle="terima-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border-2 text-sm font-medium px-5 py-2.5 transition duration-150 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-primary-darker dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                        No, cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Notifikasi -->
+    <div class="flex flex-col" x-data="{ activeTabe: 'action' }">
+        <!-- Panel header -->
+        <div class="flex-shrink-0">
+          <div class="flex items-center justify-between px-4 pt-4 border-b dark:bg-darker dark:border-primary-darker">
+            <div class="space-x-5 ml-2 pt-4">
+              <button
+                @click.prevent="activeTabe = 'action'"
+                class="px-px pb-4 text-lg font-semibold transition-all duration-200 transform translate-y-px border-b focus:outline-none"
+                :class="{'border-primary-dark dark:border-primary': activeTabe == 'action', 'border-transparent': activeTabe != 'action'}"
+              >
+                Belum Diproses <i class="bi bi-hourglass-split"></i>
+              </button>
+              <button
+                @click.prevent="activeTabe = 'setuju'"
+                class="px-px pb-4 text-lg font-semibold transition-all duration-200 transform translate-y-px border-b focus:outline-none"
+                :class="{'border-primary-dark dark:border-primary': activeTabe == 'setuju', 'border-transparent': activeTabe != 'setuju'}"
+              >
+                Telah Diproses <i class="bi bi-check2-circle"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel content (tabs) -->
+        <div class="">
+          <!-- Action tab -->
+          <div class="" x-show.transition.in="activeTabe == 'action'">
+            <div x-data="{ isActive: false, open: false}">
+                <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
+                <h1
+                  href="#"
+                  @click="$event.preventDefault(); open = !open"
+                  class="flex items-center p-4 mr-14 text-gray-700 border-r border-b dark:border-primary-darker transition-colors dark:text-light hover:text-white hover:bg-primary-dark dark:hover:bg-primary"
+                  :class="{'bg-primary text-white dark:bg-primary': isActive || open}"
+                  role="button"
+                  aria-haspopup="true"
+                  :aria-expanded="(open || isActive) ? 'true' : 'false'"
+                >
+                  <span aria-hidden="true">
+                    <svg
+                        class="w-5 h-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                        />
+                    </svg>
+                  </span>
+                  <span class="ml-2 text-sm"> Barang Menunggu Disetujui </span>
+                  <span class="ml-auto" aria-hidden="true">
+                    <!-- active class 'rotate-180' -->
+                    <svg
+                      class="w-4 h-4 transition-transform transform"
+                      :class="{ 'rotate-180': open }"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </span>
+                </h1>
+                <div role="menu" x-show="open" class="pt-2 mr-14 space-y-2 px-7 border-r dark:border-primary-darker" aria-label="notifikasi">
+                  <!-- active & hover classes 'text-gray-700 dark:text-light' -->
+                  <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
+                  <div class="flex justify-between">
+                    <!-- Info Pemesan -->
+                      <div class="mt-1">
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Nama Pemesan
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Jabatan
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Unit Kerja
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              No Telepon
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Email
+                          </h1>
+                      </div>
+    
+                      <!-- Info Barang -->
+                      <div class="mt-1">
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Nama Barang
+                          </h1>
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Merk
+                          </h1>
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Kategori
+                          </h1>
+                          <div class="flex">
+                              <h1
+                                    role="menuitem"
+                                    class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                                >
+                                    Jumlah
+                                </h1>
+                              <h1
+                                    role="menuitem"
+                                    class="block p-2 mx-5 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                                >
+                                    Satuan
+                                </h1>
+                          </div>
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Tanggal Pesan
+                          </h1>
+                      </div>
+    
+                      <!-- Image Barang dan Button -->
+                      <div class="mx-20">
+                        <div class="w-56 mb-8">           
+                            <img src="https://stackdiary.com/140x100.png" class="w-full h-full object-top rounded-lg bg-white">              
+                        </div>
+                        <div class="pb-3">
+                            <button data-modal-toggle="terima-modal" class="text-white bg-primary hover:bg-primary-darker focus:ring-4 focus:outline-none focus:ring-primary dark:bg-primary dark:hover:bg-primary-darker dark:focus:ring-primary-dark font-medium rounded-lg text-sm inline-flex items-center mr-14 px-5 py-2.5 text-center transition duration-150">
+                                Setujui
+                            </button>
+                            <button class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border-2 text-sm font-medium px-5 py-2.5 transition duration-150 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-primary-darker dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                Tolak
+                            </button>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+            </div>
+
+            <div x-data="{ isActive: false, open: false}">
+                <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
+                <h1
+                  href="#"
+                  @click="$event.preventDefault(); open = !open"
+                  class="flex items-center p-4 mr-14 text-gray-700 border-r border-b dark:border-primary-darker transition-colors dark:text-light hover:text-white hover:bg-primary-dark dark:hover:bg-primary"
+                  :class="{'bg-primary text-white dark:bg-primary': isActive || open}"
+                  role="button"
+                  aria-haspopup="true"
+                  :aria-expanded="(open || isActive) ? 'true' : 'false'"
+                >
+                  <span aria-hidden="true">
+                    <svg
+                        class="w-5 h-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                        />
+                    </svg>
+                  </span>
+                  <span class="ml-2 text-sm"> Barang Menunggu Disetujui </span>
+                  <span class="ml-auto" aria-hidden="true">
+                    <!-- active class 'rotate-180' -->
+                    <svg
+                      class="w-4 h-4 transition-transform transform"
+                      :class="{ 'rotate-180': open }"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </span>
+                </h1>
+                <div role="menu" x-show="open" class="pt-2 mr-14 space-y-2 px-7 border-r dark:border-primary-darker" aria-label="notifikasi">
+                  <!-- active & hover classes 'text-gray-700 dark:text-light' -->
+                  <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
+                  <div class="flex justify-between">
+                    <!-- Info Pemesan -->
+                      <div class="mt-1">
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Nama Pemesan
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Jabatan
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Unit Kerja
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              No Telepon
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Email
+                          </h1>
+                      </div>
+    
+                      <!-- Info Barang -->
+                      <div class="mt-1">
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Nama Barang
+                          </h1>
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Merk
+                          </h1>
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Kategori
+                          </h1>
+                          <div class="flex">
+                              <h1
+                                    role="menuitem"
+                                    class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                                >
+                                    Jumlah
+                                </h1>
+                              <h1
+                                    role="menuitem"
+                                    class="block p-2 mx-5 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                                >
+                                    Satuan
+                                </h1>
+                          </div>
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Tanggal Pesan
+                          </h1>
+                      </div>
+    
+                      <!-- Image Barang dan Button -->
+                      <div class="mx-20">
+                        <div class="w-56 mb-8">           
+                            <img src="https://stackdiary.com/140x100.png" class="w-full h-full object-top rounded-lg bg-white">              
+                        </div>
+                        <div class="pb-3">
+                            <button data-modal-toggle="terima-modal" class="text-white bg-primary hover:bg-primary-darker focus:ring-4 focus:outline-none focus:ring-primary dark:bg-primary dark:hover:bg-primary-darker dark:focus:ring-primary-dark font-medium rounded-lg text-sm inline-flex items-center mr-14 px-5 py-2.5 text-center transition duration-150">
+                                Setujui
+                            </button>
+                            <button class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border-2 text-sm font-medium px-5 py-2.5 transition duration-150 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-primary-darker dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                Tolak
+                            </button>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+            </div>
+
+            <div x-data="{ isActive: false, open: false}">
+                <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
+                <h1
+                  href="#"
+                  @click="$event.preventDefault(); open = !open"
+                  class="flex items-center p-4 mr-14 text-gray-700 border-r border-b dark:border-primary-darker transition-colors dark:text-light hover:text-white hover:bg-primary-dark dark:hover:bg-primary"
+                  :class="{'bg-primary text-white dark:bg-primary': isActive || open}"
+                  role="button"
+                  aria-haspopup="true"
+                  :aria-expanded="(open || isActive) ? 'true' : 'false'"
+                >
+                  <span aria-hidden="true">
+                    <svg
+                        class="w-5 h-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                        />
+                    </svg>
+                  </span>
+                  <span class="ml-2 text-sm"> Barang Menunggu Disetujui </span>
+                  <span class="ml-auto" aria-hidden="true">
+                    <!-- active class 'rotate-180' -->
+                    <svg
+                      class="w-4 h-4 transition-transform transform"
+                      :class="{ 'rotate-180': open }"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </span>
+                </h1>
+                <div role="menu" x-show="open" class="pt-2 mr-14 space-y-2 px-7 border-r dark:border-primary-darker" aria-label="notifikasi">
+                  <!-- active & hover classes 'text-gray-700 dark:text-light' -->
+                  <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
+                  <div class="flex justify-between">
+                    <!-- Info Pemesan -->
+                      <div class="mt-1">
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Nama Pemesan
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Jabatan
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Unit Kerja
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              No Telepon
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Email
+                          </h1>
+                      </div>
+    
+                      <!-- Info Barang -->
+                      <div class="mt-1">
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Nama Barang
+                          </h1>
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Merk
+                          </h1>
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Kategori
+                          </h1>
+                          <div class="flex">
+                              <h1
+                                    role="menuitem"
+                                    class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                                >
+                                    Jumlah
+                                </h1>
+                              <h1
+                                    role="menuitem"
+                                    class="block p-2 mx-5 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                                >
+                                    Satuan
+                                </h1>
+                          </div>
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Tanggal Pesan
+                          </h1>
+                      </div>
+    
+                      <!-- Image Barang dan Button -->
+                      <div class="mx-20">
+                        <div class="w-56 mb-8">           
+                            <img src="https://stackdiary.com/140x100.png" class="w-full h-full object-top rounded-lg bg-white">              
+                        </div>
+                        <div class="pb-3">
+                            <button data-modal-toggle="terima-modal" class="text-white bg-primary hover:bg-primary-darker focus:ring-4 focus:outline-none focus:ring-primary dark:bg-primary dark:hover:bg-primary-darker dark:focus:ring-primary-dark font-medium rounded-lg text-sm inline-flex items-center mr-14 px-5 py-2.5 text-center transition duration-150">
+                                Setujui
+                            </button>
+                            <button class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border-2 text-sm font-medium px-5 py-2.5 transition duration-150 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-primary-darker dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                Tolak
+                            </button>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+
+          <!-- setuju tab -->
+          <div class="" x-show.transition.in="activeTabe == 'setuju'">
+            <div x-data="{ isActive: false, open: false}">
+                <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
+                <h1
+                  href="#"
+                  @click="$event.preventDefault(); open = !open"
+                  class="flex items-center p-4 mr-14 text-gray-700 border-r border-b dark:border-primary-darker transition-colors dark:text-light hover:text-white hover:bg-primary-dark dark:hover:bg-primary"
+                  :class="{'bg-primary text-white dark:bg-primary': isActive || open}"
+                  role="button"
+                  aria-haspopup="true"
+                  :aria-expanded="(open || isActive) ? 'true' : 'false'"
+                >
+                  <span aria-hidden="true">
+                    <i class="bi bi-check2-circle w-5 h-5 font-bold"></i>
+                  </span>
+                  <span class="ml-2 text-sm"> Barang Telah Disetujui </span>
+                  <span class="ml-auto" aria-hidden="true">
+                    <!-- active class 'rotate-180' -->
+                    <svg
+                      class="w-4 h-4 transition-transform transform"
+                      :class="{ 'rotate-180': open }"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </span>
+                </h1>
+                <div role="menu" x-show="open" class="pt-2 mr-14 space-y-2 px-7 border-r dark:border-primary-darker" aria-label="notifikasi">
+                  <!-- active & hover classes 'text-gray-700 dark:text-light' -->
+                  <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
+                  <div class="flex justify-between">
+                    <!-- Info Pemesan -->
+                      <div class="mt-1">
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Nama Pemesan
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Jabatan
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Unit Kerja
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              No Telepon
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Email
+                          </h1>
+                      </div>
+    
+                      <!-- Info Barang -->
+                      <div class="mt-1">
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Nama Barang
+                          </h1>
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Merk
+                          </h1>
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Kategori
+                          </h1>
+                          <div class="flex">
+                              <h1
+                                    role="menuitem"
+                                    class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                                >
+                                    Jumlah
+                                </h1>
+                              <h1
+                                    role="menuitem"
+                                    class="block p-2 mx-5 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                                >
+                                    Satuan
+                                </h1>
+                          </div>
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Tanggal Pesan
+                          </h1>
+                      </div>
+    
+                      <!-- Image Barang -->
+                      <div class="mx-20">
+                        <div class="w-56 mb-8">           
+                            <img src="https://stackdiary.com/140x100.png" class="w-full h-full object-top rounded-lg bg-white">              
+                        </div>
+                      </div>
+                  </div>
+                </div>
+            </div>
+            
+            <div x-data="{ isActive: false, open: false}">
+                <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
+                <h1
+                  href="#"
+                  @click="$event.preventDefault(); open = !open"
+                  class="flex items-center p-4 mr-14 text-gray-700 border-r border-b dark:border-primary-darker transition-colors dark:text-light hover:text-white hover:bg-primary-dark dark:hover:bg-primary"
+                  :class="{'bg-primary text-white dark:bg-primary': isActive || open}"
+                  role="button"
+                  aria-haspopup="true"
+                  :aria-expanded="(open || isActive) ? 'true' : 'false'"
+                >
+                  <span aria-hidden="true">
+                    <i class="bi bi-check2-circle w-5 h-5 font-bold"></i>
+                  </span>
+                  <span class="ml-2 text-sm"> Barang Telah Disetujui </span>
+                  <span class="ml-auto" aria-hidden="true">
+                    <!-- active class 'rotate-180' -->
+                    <svg
+                      class="w-4 h-4 transition-transform transform"
+                      :class="{ 'rotate-180': open }"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </span>
+                </h1>
+                <div role="menu" x-show="open" class="pt-2 mr-14 space-y-2 px-7 border-r dark:border-primary-darker" aria-label="notifikasi">
+                  <!-- active & hover classes 'text-gray-700 dark:text-light' -->
+                  <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
+                  <div class="flex justify-between">
+                    <!-- Info Pemesan -->
+                      <div class="mt-1">
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Nama Pemesan
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Jabatan
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Unit Kerja
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              No Telepon
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Email
+                          </h1>
+                      </div>
+    
+                      <!-- Info Barang -->
+                      <div class="mt-1">
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Nama Barang
+                          </h1>
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Merk
+                          </h1>
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Kategori
+                          </h1>
+                          <div class="flex">
+                              <h1
+                                    role="menuitem"
+                                    class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                                >
+                                    Jumlah
+                                </h1>
+                              <h1
+                                    role="menuitem"
+                                    class="block p-2 mx-5 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                                >
+                                    Satuan
+                                </h1>
+                          </div>
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Tanggal Pesan
+                          </h1>
+                      </div>
+    
+                      <!-- Image Barang -->
+                      <div class="mx-20">
+                        <div class="w-56 mb-8">           
+                            <img src="https://stackdiary.com/140x100.png" class="w-full h-full object-top rounded-lg bg-white">              
+                        </div>
+                      </div>
+                  </div>
+                </div>
+            </div>
+
+            <div x-data="{ isActive: false, open: false}">
+                <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
+                <h1
+                  href="#"
+                  @click="$event.preventDefault(); open = !open"
+                  class="flex items-center p-4 mr-14 text-gray-700 border-r border-b dark:border-primary-darker transition-colors dark:text-light hover:text-white hover:bg-primary-dark dark:hover:bg-primary"
+                  :class="{'bg-primary text-white dark:bg-primary': isActive || open}"
+                  role="button"
+                  aria-haspopup="true"
+                  :aria-expanded="(open || isActive) ? 'true' : 'false'"
+                >
+                  <span aria-hidden="true">
+                    <i class="bi bi-check2-circle w-5 h-5 font-bold"></i>
+                  </span>
+                  <span class="ml-2 text-sm"> Barang Telah Disetujui </span>
+                  <span class="ml-auto" aria-hidden="true">
+                    <!-- active class 'rotate-180' -->
+                    <svg
+                      class="w-4 h-4 transition-transform transform"
+                      :class="{ 'rotate-180': open }"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </span>
+                </h1>
+                <div role="menu" x-show="open" class="pt-2 mr-14 space-y-2 px-7 border-r dark:border-primary-darker" aria-label="notifikasi">
+                  <!-- active & hover classes 'text-gray-700 dark:text-light' -->
+                  <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
+                  <div class="flex justify-between">
+                    <!-- Info Pemesan -->
+                      <div class="mt-1">
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Nama Pemesan
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Jabatan
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Unit Kerja
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              No Telepon
+                          </h1>
+                          <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Email
+                          </h1>
+                      </div>
+    
+                      <!-- Info Barang -->
+                      <div class="mt-1">
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Nama Barang
+                          </h1>
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Merk
+                          </h1>
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Kategori
+                          </h1>
+                          <div class="flex">
+                              <h1
+                                    role="menuitem"
+                                    class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                                >
+                                    Jumlah
+                                </h1>
+                              <h1
+                                    role="menuitem"
+                                    class="block p-2 mx-5 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                                >
+                                    Satuan
+                                </h1>
+                          </div>
+                        <h1
+                              role="menuitem"
+                              class="block p-2 text-sm text-gray-600 dark:text-gray-400 transition-colors rounded-md"
+                          >
+                              Tanggal Pesan
+                          </h1>
+                      </div>
+    
+                      <!-- Image Barang -->
+                      <div class="mx-20">
+                        <div class="w-56 mb-8">           
+                            <img src="https://stackdiary.com/140x100.png" class="w-full h-full object-top rounded-lg bg-white">              
+                        </div>
+                      </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Sol -->
+    
+
+
+{% endblock %}

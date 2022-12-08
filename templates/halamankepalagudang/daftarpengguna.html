@@ -1,0 +1,136 @@
+{% extends 'halamankepalagudang/layout.html' %}
+
+{% block title %}Daftar Pengguna{% endblock %}
+
+{% block content %}
+<style>
+.dataTables_wrapper .dataTables_filter {
+    float: none;
+    text-align: center;
+}
+a.paginate_button,
+a.paginate_active {
+    display: inline-block;
+    background-color: #8d8d8d;
+    padding: 2px 6px;
+    margin-left: 2px;
+    cursor: pointer;
+    *cursor: hand;
+}
+.paginate_button.current  {
+    color: white !important;
+  background-color: #2980B9 !important;
+}
+.paging_full_numbers a.paginate_button {
+    color: #fff !important;
+}
+.paging_full_numbers a.paginate_active {
+    color: #fff !important;
+}
+ 
+div.dataTables_info {
+    padding: 9px 6px 6px 6px;
+}
+</style>
+<div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
+    <h1 class="text-2xl font-semibold">Daftar Pengguna</h1>
+</div>
+
+<div class="overflow-x-auto relative shadow-md sm:">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.jqueryui.min.css" />
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" id="mytable">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="py-3 px-6">
+                    Nama & NIP
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    Email & No.Handphone
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    Jabatan
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    Status
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in pengguna %}
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="flex items-center py-4 px-6 text-gray-900 whitespace-nowrap dark:text-white">
+                    <div class="pl-3">
+                      <div class="text-gray-500 font-semibold">{{ row.nama }}</div>
+                      <div class="font-normal text-gray-500">{{ row.nip }}</div>
+                  </div>  
+                </th>
+                
+                <td class="py-4 px-6">
+                    <div class="pl-3">
+                        <div class="text-base font-semibold">{{ row.email }}</div>
+                        <div class="font-normal text-gray-500">{{ row.nomor_tlp }}</div>
+                    </div>
+                    
+                    
+                </td>
+                <td class="py-4 px-6">
+                    {{ row.nama_jabatan }}
+                </td>
+                <td class="py-4 px-6">
+                    <div class="flex items-center">
+                        {% if row['nama_status'] == 'Aktif' : %}
+                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>{{ row.nama_status }}
+                        {% else %}
+                        <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>{{ row.nama_status }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="py-4 mb-2 px-6">
+                  <div class="flex items-center">
+                    <a href="/kepgud/daftarpengguna/editpengguna/{{ row.id_user }}" class="px-4 py-2 mx-2 text-sm text-white rounded-md bg-blue-500 hover:bg-red-700 focus:outline-none focus:ring focus:ring-red-500 focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark" role="button" title="Nonactive"><i class="bi bi-pen-fill"></i></a>
+
+                    {% if row['nama_status'] == 'Aktif' %}
+                    <a href="/kepgud/daftarpengguna/nonaktifakun/{{ row.id_user }}" class="px-4 py-2 mx-2 text-sm text-white rounded-md bg-red-500 hover:bg-red-700 focus:outline-none focus:ring focus:ring-red-500 focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark" role="button" title="Nonactive"><i class="bi bi-bookmark-dash-fill"></i></a>
+
+                    {% else %}
+                    <a href="/kepgud/daftarpengguna/aktifakun/{{ row.id_user }}" class="px-4 py-2 mx-2 text-sm text-white rounded-md bg-green-500 hover:bg-green-700 focus:outline-none focus:ring focus:ring-green-500 focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark" role="button" title="Active"><i class="bi bi-bookmark-check-fill"></i></a>
+
+                    {% endif %}
+                </div>
+                </td>
+            </tr>
+            {% endfor %} 
+        </tbody>
+         
+    </table>
+    <script>
+        $('#mytable').dataTable({
+            "language": {
+                "sInfo" : "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+                "emptyTable": "Tabel Kosong",
+                "lengthMenu":     "Menampilkan _MENU_ Data"
+            },
+            "lengthMenu": [ [5, 10, 50, -1], [5, 10, 50, "Semua"] ],
+            
+            pagingType: 'full_numbers'
+            
+            
+        });
+        $(document).ready(function () {             
+            $('.dataTables_filter select').
+    attr('placeholder','Search in this blog ....').
+    css({'width':'350px','display':'inline-block'});
+    
+    });
+    
+    </script>
+
+  </div>
+
+{% endblock %}

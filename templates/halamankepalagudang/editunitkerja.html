@@ -1,0 +1,68 @@
+{% extends "halamankepalagudang/layout.html" %}
+
+{% block title %}Edit Unit Kerja{% endblock %}
+
+{% block content %}
+<form action="/kepgud/unitkerja/editunitkerja/{{ row.id_unitkerja }}" method=post>
+        <br>
+            <div class="card-body">
+                    <div class="mb-3 row">
+                        <label for="id_unitkerja" class="col-sm-2 col-form-label">ID Unit Kerja:</label>
+                            <div class="col-sm-10">
+                        <input type="input" class="form-control" name="id_unitkerja" value="{{ row.id_unitkerja }}" required autocomplete="off" disabled>
+                            </div>
+                        </div>
+            
+                    <div class="mb-3 row">
+                        <label for="namaunitkerja" class="col-sm-2 col-form-label">Nama Unit Kerja:</label>
+                            <div class="col-sm-10">
+                                <input type="input" class="form-control" name="namaunitkerja" value="{{ row.namaunitkerja }}" required autocomplete="off">                             
+                                </div>
+                        </div>
+                    <div class="mb-3 row">
+                        <label for="alamat" class="col-sm-2 col-form-label">Alamat Unit Kerja:</label>
+                            <div class="col-sm-10">
+                                <input type="input" class="form-control" name="alamat" value="{{ row.alamat }}" required autocomplete="off">                             
+                                </div>
+                        </div>
+                    <div class="mb-3 row">
+                        <label for="no_telp" class="col-sm-2 col-form-label">Nomor Telepon:</label>
+                            <div class="col-sm-10">
+                                <input type="input" class="form-control" name="no_telp" value="{{ row.no_telp }}" required autocomplete="off">                             
+                                </div>
+                        </div>
+                    <div class="mb-3 row">
+                        <label for="no_fax" class="col-sm-2 col-form-label">Nomor Fax:</label>
+                            <div class="col-sm-10">
+                                <input type="input" class="form-control" name="no_fax" value="{{ row.no_fax }}" required autocomplete="off">                             
+                                </div>
+                        </div>
+                    <div class="mb-3 row">
+                        <label for="email" class="col-sm-2 col-form-label">Email:</label>
+                            <div class="col-sm-10">
+                                <input type="input" class="form-control" name="email" value="{{ row.email }}" required autocomplete="off">                             
+                                </div>
+                        </div>
+                    <div class="mb-3 row">
+                        <label for="web" class="col-sm-2 col-form-label">Website:</label>
+                            <div class="col-sm-10">
+                                <input type="input" class="form-control" name="web" value="{{ row.web }}" required autocomplete="off">                             
+                                </div>
+                        </div>
+                    <div class="mb-3 row">
+                        <label for="cabang" class="col-sm-2 col-form-label">Cabang:</label>
+                            <div class="col-sm-10">
+                                <input type="input" class="form-control" name="cabang" value="{{ row.cabang }}" required autocomplete="off">                             
+                                </div>
+                        </div>
+            </div>
+            <div class="card text-center">
+                <div class="card-footer text-muted">
+                    <button type="submit" class="btn btn-warning">Update</button>
+                </form>
+                <a href="{{ url_for('unitkerja') }}">Cancel
+            </div>
+            </div>
+          
+    
+{% endblock %}

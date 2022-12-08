@@ -1,0 +1,188 @@
+.carian{
+    color: black;
+    height:100%;
+    display:flex;
+      font-family: 'Ubuntu', sans-serif;
+  
+  }
+  .options{
+    margin:1rem;
+    max-width:350px;
+    width:120%;
+    height:250px;
+  }
+  select {
+      display: none !important;
+  }
+  
+  .bawah {
+      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 100%);
+      background-repeat: repeat-x;
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#40FFFFFF', endColorstr='#00FFFFFF', GradientType=0);
+      background-color: white;
+      border-radius: 6px;
+      border: solid 1px #eee;
+      box-shadow: 0px 2px 5px 0px rgba(155, 155, 155, 0.5);
+      box-sizing: border-box;
+      cursor: pointer;
+      display: block;
+      float: left;
+      font-size: 14px;
+      font-weight: normal;
+      height: 42px;
+      line-height: 40px;
+      outline: none;
+      padding-left: 18px;
+      padding-right: 30px;
+      position: relative;
+      transition: all 0.2s ease-in-out;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      white-space: nowrap;
+      width: auto;
+  
+  }
+  
+  .bawah:focus {
+      background-color: lightgray;
+  }
+  
+  .bawah:hover {
+      background-color: lightgray;
+  }
+  
+  .bawah:active,
+  .bawah.open {
+      background-color: lightgray !important;
+      border-color: #bbb;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05) inset;
+  }
+  
+  .bawah:after {
+      height: 0;
+      width: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 4px solid #777;
+      -webkit-transform: origin(50% 20%);
+      transform: origin(50% 20%);
+      transition: all 0.125s ease-in-out;
+      content: '';
+      display: block;
+      margin-top: -2px;
+      pointer-events: none;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+  }
+  
+  .bawah.open:after {
+      -webkit-transform: rotate(-180deg);
+      transform: rotate(-180deg);
+  }
+  
+  .bawah.open .list {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+      opacity: 1;
+      pointer-events: auto;
+  }
+  
+  .bawah.open .option {
+      cursor: pointer;
+  }
+  
+  .bawah.wide {
+      width: 100%;
+  }
+  
+  .bawah.wide .list {
+      left: 0 !important;
+      right: 0 !important;
+  }
+  
+  .bawah .list {
+      box-sizing: border-box;
+      transition: all 0.15s cubic-bezier(0.25, 0, 0.25, 1.75), opacity 0.1s linear;
+      -webkit-transform: scale(0.75);
+      transform: scale(0.75);
+      -webkit-transform-origin: 50% 0;
+      transform-origin: 50% 0;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.09);
+      background-color: white;
+      border-radius: 6px;
+      margin-top: 4px;
+      padding: 3px 0;
+      opacity: 0;
+      overflow: hidden;
+      pointer-events: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 999;
+      max-height: 250px;
+      overflow: auto;
+      border: 1px solid #ddd;
+  }
+  
+  .bawah .list:hover .option:not(:hover) {
+      background-color: transparent !important;
+  }
+  .bawah .dd-search{
+    overflow:hidden;
+    display:flex;
+    margin:0.5rem;
+  }
+  
+  .bawah .dd-searchbox{
+    width:90%;
+    padding:0.5rem;
+    border:1px solid #999;
+    border-color:#999;
+    border-radius:4px;
+    outline:none;
+  }
+  .bawah .dd-searchbox:focus{
+    border-color:#12CBC4;
+  }
+  
+  .bawah .list ul {
+      padding: 0;
+  }
+  
+  .bawah .option {
+      cursor: default;
+      font-weight: 400;
+      line-height: 40px;
+      outline: none;
+      transition: all 0.2s;
+      list-style: none;
+      color: black;
+  }
+  
+  .bawah .option:hover,
+  .bawah .option:focus {
+      background-color:lightgray !important;
+  }
+  
+  .bawah .option.selected {
+      font-weight: 600;
+      color: blue;
+  }
+  
+  .bawah .option.selected:focus {
+      background: #f6f6f6;
+  }
+  
+  .bawah a {
+      color: black;
+      text-decoration: none;
+      transition: all 0.2s ease-in-out;
+  }
+  
+  .bawah a:hover {
+      color: white;
+  }
+  

@@ -1,0 +1,112 @@
+{% extends 'halamankepalagudang/layout.html' %}
+
+{% block title %}Format Pendanaan{% endblock %}
+
+{% block content %}
+
+<style>
+    .dataTables_wrapper .dataTables_filter {
+        float: none;
+        text-align: center;
+    }
+    a.paginate_button,
+    a.paginate_active {
+        display: inline-block;
+        background-color: #8d8d8d;
+        padding: 2px 6px;
+        margin-left: 2px;
+        cursor: pointer;
+        *cursor: hand;
+    }
+    .paginate_button.current  {
+        color: white !important;
+      background-color: #2980B9 !important;
+    }
+    .paging_full_numbers a.paginate_button {
+        color: #fff !important;
+    }
+    .paging_full_numbers a.paginate_active {
+        color: #fff !important;
+    }
+     
+    div.dataTables_info {
+        padding: 9px 6px 6px 6px;
+    }
+    </style>
+
+
+<div class="flex items-center justify-between px-4 py-4 border-b lg:py-4 dark:border-primary-darker">
+    <h1 class="text-2xl font-semibold">Laporan Pendanaan </h1>
+   
+</div> 
+
+
+
+<div class="overflow-x-auto relative">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.jqueryui.min.css" />
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" id="mytable">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="py-3 px-6 ">
+                    Sumber Dana
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    Total
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="bg-white dark:bg-gray-800">
+                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    BOPD
+                </th>
+                <td class="py-4 px-6">
+                    Rp. 1.000.000
+                </td>
+            </tr>
+            <tr class="bg-white dark:bg-gray-800">
+                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    BOS
+                </th>
+                <td class="py-4 px-6">
+                    Rp. 1.000.000
+                </td>
+            </tr>
+        </tbody>
+        <tfoot class="border-b border-black">
+            <tr class="font-semibold text-gray-900 dark:text-white">
+                <th scope="row" class="py-3 px-6 text-base">Total</th>
+                <td class="py-3 px-6">Rp. 2.000.000</td>
+            </tr>
+        </tfoot>
+    </table>
+    <script>
+        $('#mytable').dataTable({
+            "language": {
+                "sInfo" : "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+                "emptyTable": "Tabel Kosong",
+                "lengthMenu":     "Menampilkan _MENU_ Data"
+            },
+            "lengthMenu": [ [5, 10, 50, -1], [5, 10, 50, "Semua"] ],
+            
+            pagingType: 'full_numbers'
+            
+            
+        });
+        $(document).ready(function () {             
+            $('.dataTables_filter select').
+    attr('placeholder','Search in this blog ....').
+    css({'width':'350px','display':'inline-block'});
+    
+    });
+    
+    </script>
+
+</div>
+
+
+{% endblock %}

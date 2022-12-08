@@ -1,0 +1,63 @@
+{% extends 'halamanpegawai/layout.html' %}
+
+{% block title %}Permintaan Barang{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
+    <h1 class="text-2xl font-semibold"><a href="#"><i class="bi bi-arrow-left"></i></a>Permintaan Barang</h1>
+  </div>
+
+  <div class="flex ">
+    <!-- image -->
+    <div class="mt-5 ml-5 mb-5">
+        <div class="w-[400px] h-[300px] bg-gray-800 rounded-lg ">
+    
+        </div>
+    </div>
+    <div class="mt-5 ml-5">
+        <div class="flex">
+            <div class="mb-3 row mr-5">
+                <label for="id_permintaan" class="col-sm-2 col-form-label">Nama Barang:</label>
+                    <div class="col-sm-10">
+                <input type="text" class="px-28 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Auto Generated" name="id_permintaan" autocomplete="off">
+                    </div>    
+                </div>
+        </div>
+        <div class="flex">
+            <div class="mb-3 row mr-5">
+                <label for="id_permintaan" class="col-sm-2 col-form-label">Merk : </label>
+                    <div class="col-sm-10">
+                <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Auto Generated" name="id_permintaan" autocomplete="off">
+                    </div>    
+                </div>
+            <div class="mb-3 row">
+                <label for="id_permintaan" class="col-sm-2 col-form-label">Kategori : </label>
+                    <div class="col-sm-10">
+                <input type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Auto Generated" name="id_permintaan" autocomplete="off">
+                    </div>    
+                </div>
+        </div>
+        <div class="flex">
+            <div class="mb-3 row mr-5">
+                <label for="id_permintaan" class="col-sm-2 col-form-label">Jumlah : </label>
+                    <div class="col-sm-10">
+                <input type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Jumlah" name="id_permintaan" autocomplete="off">
+                    </div>    
+                </div>
+            <div class="mb-3 row mt-6">
+                    <div class="col-sm-10">
+                <input type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Satuan " name="id_permintaan" autocomplete="off">
+                    </div>    
+                </div>
+        </div>
+        <button type="button" class="focus:outline-none mt-5 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Ajukan Permintaan</button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+
+{% endblock %}

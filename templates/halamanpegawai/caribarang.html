@@ -1,0 +1,51 @@
+<div class="container grid grid-cols-2 gap-6 pt-4 pb-16">
+    <!-- products -->
+    <div class="col-span-3 grid justify-center">
+        <!-- Main Order Barang -->
+        <div class="grid grid-cols-3 gap-6">
+{% for row in employee %}
+
+                <div class="bg-white border dark:bg-darker dark:border-primary-darker shadow rounded overflow-hidden group">
+                    <div class="relative">
+                        <img src="/static/img/barang/{{ row.files }}" alt="product 1" class="w-[320px] h-[212px] rounded-lg">
+                        <div class="absolute inset-0 bg-black bg-opacity-60 flex items-center 
+                        justify-center gap-2 opacity-0 group-hover:opacity-100 transition duration-300">
+                            <a href="#"
+                                class="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-700 transition duration-200"
+                                title="view product">
+                                <i class="bi bi-box-seam"></i>
+                            </a>
+                            <a href="#"
+                                class="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-700 transition duration-200"
+                                title="Order"
+                                data-modal-toggle="order-modal">
+                                <i class="bi bi-cart"></i>
+                            </a>
+                        </div>
+                    </div>  
+                    <div class="pt-4 pb-3 px-4">
+                        <a href="/pegawai/homepegawai/buatpermintaan/orderbarang/{{ row.id_barang }}" data-modal-toggle="order-modal">
+                            <h4 class="uppercase font-medium text-lg lg:text-xl mb-2 text-gray-800 hover:text-primary transition dark:text-white dark:hover:text-darker">
+                                {{ row.namabarang }}</h4>
+                        </a>
+                        <p class="text-base text-primary font-semibold">{{ row.merk }}</p>
+                        <div class="flex items-center text-center">
+                            <div class="text-base text-yellow-400 font-semibold mx-auto">{{ row.namakategori }}</div>
+                        </div>
+                        <div class="flex items-baseline mb-1 space-x-2">
+                            <p class="text-base text-primary font-semibold">Jml Barang  :   {{ row.stok }}</p>
+                            <p class="text-sm text-gray-400">{{ row.nama_satuan }}</p>
+                        </div>
+                    </div>
+                    <a
+                        class="block w-full py-3 text-center text-white bg-primary hover:border hover:border-primary rounded-b hover:bg-transparent hover:text-primary transition"
+                        href="/pegawai/homepegawai/buatpermintaan/orderbarang/{{ row.id_barang }}">
+                        Ajukan Permintaan
+                </a>
+                </div>
+                
+            {% endfor %}
+        </div>
+    </div>
+    <!-- ./products -->
+</div>

@@ -1,0 +1,136 @@
+{% extends 'halamankepalagudang/layout.html' %}
+
+{% block content %}
+
+{% block title %}Tambah Barang{% endblock %}
+<div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
+    <h1 class="text-2xl font-semibold"><a href="#"><i class="bi bi-arrow-left"></i></a>Tambah Barang</h1>
+</div>
+
+<!-- Main -->
+  <div class="flex pb-8">
+    <!-- image -->
+    <div class="mt-5 ml-5 mb-5">
+        <div class="w-[400px] h-[300px] bg-gray-800 rounded-lg ">
+            <img id="uploadPreview" class="w-[400px] h-[300px] rounded-lg">
+        </div>
+    </div>
+    <div class="ml-5 mt-5 p-7 bg-white border-2 border-slate-400 rounded-md dark:border-primary-darker dark:bg-darker">
+        <form class="space-y-6" action="/kepgud/daftarbarang/tambahbarang" enctype = "multipart/form-data" method=post>
+            <div class="flex justify-between items-center">
+                <div class="mx-1">
+                    <label for="id_stok" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">ID Stok</label>
+                    <input type="text" name="id_stok" id="id_stok" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="ID Stok" required autocomplete="off">
+                </div>
+                <div class="mx-1">
+                    <label for="stok" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Jumlah Stok</label>
+                    <input type="number" name="stok" id="stok" placeholder="Jumlah Stok" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required autocomplete="off">
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center">
+                <div class="mx-1">
+                    <label for="jml_barang_msk" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Jumlah Barang Masuk</label>
+                    <input type="number" name="jml_barang_msk" id="jml_barang_msk" placeholder="Jumlah Barang Masuk" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" autocomplete="off" required>
+                </div>
+                <div class="mx-1">
+                    <label for="hrg_satuan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Harga Satuan</label>
+                    <input type="number" name="hrg_satuan" id="hrg_satuan" placeholder="Harga Satuan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" autocomplete="off" required>
+                </div>
+    
+            </div>
+
+            <div>
+                <div class="flex justify-between items-center">
+                    <div class="mx-1">
+                        <label for="total" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Total Harga</label>
+                        <input type="number" name="total" id="total" placeholder="Total Harga" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" autocomplete="off" required>
+                    </div>
+                    <div class="mx-1">
+                        <label for="id_supplier" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Supplier</label>
+                              <select name="id_supplier" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                                {% for supplier in supplier %}
+                                  <option value="{{supplier.id_supplier}}">{{supplier.namasupplier}}</option>
+                                  {% endfor %}
+                            </select>
+                        </div>
+    
+                    <div class="mx-1">
+                        <label for="rak" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Rak</label>
+                        <select name="id_rak" data-live-search="true" id="car_brand" class="mx-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" autocomplete="off" title="Supplier">
+                            {% for rak in rak %}
+                            <option value="{{rak.id_rak}}">{{rak.nama_rak}}</option>
+                            {% endfor %}
+                            </select>
+                          </div>
+                </div>
+            </div>
+            <div class="flex justify-between items-center">
+                <div class="mx-1">
+                    <label for="idsumberdana" class="block text-sm font-medium text-gray-900 dark:text-gray-300">Sumber Dana</label>
+                    <select name="idsumberdana" data-live-search="true" id="sumber_dana" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" title="Sumber Dana">
+                        {% for sumberdana in sumberdana %}
+                        <option value="{{sumberdana.idsumberdana}}">{{ sumberdana.namasumberdana }}</option>
+                        {% endfor %}
+                    </select>                </div>
+                <div class="mx-1">
+                    <label for="kategori" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Kategori</label>
+                    <select name="id_kategori" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" title="Kategori">
+                        {% for kategoribarang in kategoribarang %}
+                        <option value="{{kategoribarang.id_kategori}}">{{kategoribarang.namakategori}}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                <div class="mx-1">
+                    <label for="rak" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Satuan</label>
+                    <select name="id_satuan" class="mx-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" title="Kategori">
+                        {% for satuanbarang in satuanbarang %}
+                        <option value="{{satuanbarang.id_satuan}}">{{satuanbarang.nama_satuan}}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+            </div>
+
+            <div class="flex justify-between items-center">
+
+            </div>
+            <div>
+                <label for="namabarang" class="block text-sm font-medium text-gray-900 dark:text-gray-300">Barang</label>
+                <div class="flex items-center">
+                    <input type="text" name="namabarang" id="namabarang" placeholder="Nama Barang" class="mx-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" autocomplete="off" required>
+                    <input type="text" name="merk" id="merk" placeholder="Merk Barang" class="mx-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" autocomplete="off" required>
+                </div>
+            </div>
+
+
+            <div class="mb-5">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="file_input">Upload image</label>
+                <input class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" enctype="multipart/form-data" id="uploadImage" onchange="PreviewImage();" name="files[]" type="file">
+                <p class="mt-1 text-xs text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG or GIF (MAX. 800x400px).</p>
+            </div>
+
+            <div class="flex justify-between">
+                <button type="submit" class="text-black bg-sky-500 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-primary dark:bg-primary dark:hover:bg-primary-darker dark:focus:ring-primary-dark font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2 transition duration-150">
+                    Tambah
+                </button>
+                <a href="{{ url_for('daftarbarang') }}" type="button" class="text-black border-black bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border-2 text-sm font-medium px-5 py-2.5 transition duration-150 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-primary-darker dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" data-modal-toggle="authentication-modal">
+                    Kembali
+                </a>
+            </div>
+        </form>    
+    </div>
+    
+  </div>
+  <script type="text/javascript">
+
+    function PreviewImage() {
+        var oFReader = new FileReader();
+        oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
+
+        oFReader.onload = function (oFREvent) {
+            document.getElementById("uploadPreview").src = oFREvent.target.result;
+        };
+    };
+
+</script>
+{% endblock %}
